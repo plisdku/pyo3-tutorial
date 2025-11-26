@@ -28,7 +28,7 @@ I had the repo set up already, but I ran `uv init .` and got this directory stru
 ├── main.py
 ├── notes
 │   └── 25-11-25-starting.md
-└── pyproject.toml
+└── pyproject.tomlin
 ```
 
 I ran the hello-world with `uv run main.py` which initialized a new virtual environment at `.venv` in the repo. I had to add `.venv` to my .gitignore manually since I'd already created a pretty empty one.
@@ -51,4 +51,16 @@ Anyway I'm up to here now:
 └── uv.lock
 ```
 
+# Github CLI
 
+Ok I'll try it! `brew install gh`. I needed to start with `gh auth login`; I chose SSH and it found my SSH key and I authenticated in the browser and it was done. I had to then go add `gh auth refresh -s project,read:project` to get some more powers.
+
+Next project: somehow push this new repo to my github.
+
+Discovered: `gh project create` made a "Project" which is more than I needed. Deleted it. Instead, ran
+
+```
+gh repo create
+```
+
+and used `.` as the repo to push. Then `gh repo view -w` pops it open in the browser, huzzah.
