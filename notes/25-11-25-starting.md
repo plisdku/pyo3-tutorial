@@ -110,3 +110,19 @@ petunia
 ```
 
 The `CI.yml` is nice. I'll just try to move the `Cargo.toml` down and copy some `pyproject.toml` to my main file.
+
+Well, I got some boilerplate code. Let's try this:
+
+```
+% uv run maturin develop
+```
+
+That installed and compiled a bunch of stuff and built my module.
+
+```
+% uv run python -c "import petunia; print(petunia.sum_as_string(5, 20))"
+25
+```
+
+Holy moly it worked.
+
