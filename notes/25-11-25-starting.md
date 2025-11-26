@@ -51,7 +51,7 @@ Anyway I'm up to here now:
 └── uv.lock
 ```
 
-# Github CLI
+## Github CLI
 
 Ok I'll try it! `brew install gh`. I needed to start with `gh auth login`; I chose SSH and it found my SSH key and I authenticated in the browser and it was done. I had to then go add `gh auth refresh -s project,read:project` to get some more powers.
 
@@ -64,3 +64,49 @@ gh repo create
 ```
 
 and used `.` as the repo to push. Then `gh repo view -w` pops it open in the browser, huzzah.
+
+## Try `uv add --dev`
+
+Decided to try something:
+
+```
+% uv add --dev ruff maturin pre-commit tbump
+```
+
+This added all of these dependencies to the pyproject.toml under `[dependency-groups]` but not as my familiar `[project.optional-dependencies]`, known as "extras" in the python documentation. What was up with those? Among other issues, asking a tool to install "extras" will also install all the main project dependencies. [PEP 735](https://peps.python.org/pep-0735/) goes into some detail about this.
+
+Anyway, `[dependency-groups]` seems to be the new way, and I have `maturin` now.
+
+## Maturin
+
+```
+% uv run maturin init
+💥 maturin failed
+  Caused by: `maturin init` cannot be run on existing projects
+```
+
+Ok I already started it. Let's just try in a subdirectory.
+
+```
+% uv run maturin init petunia
+✔ 🤷 Which kind of bindings to use?
+  📖 Documentation: https://maturin.rs/bindings.html · pyo3
+  ✨ Done! Initialized project petunia
+```
+
+This actually made a ton of stuff.
+
+```
+% tree petunia -La 3
+petunia
+├── .github
+│   └── workflows
+│       └── CI.yml
+├── .gitignore
+├── Cargo.toml
+├── pyproject.toml
+└── src
+    └── lib.rs
+```
+
+The `CI.yml` is nice. I'll just try to move the `Cargo.toml` down and copy some `pyproject.toml` to my main file.
