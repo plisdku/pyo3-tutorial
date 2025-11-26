@@ -126,3 +126,38 @@ That installed and compiled a bunch of stuff and built my module.
 
 Holy moly it worked.
 
+### [Using Rust from Python](https://pyo3.rs/v0.27.1/rust-from-python.html)
+
+It says I can make modules, functions, and classes with methods. Neato.
+
+#### `.pyi` file
+
+Since I have `src/lib.rs` I made `src/petunia.pyi` containing
+
+```
+from typing import Any
+
+def sum_as_string(a: int, b: int) -> str:
+    """
+    Add two integers and return their sum as a string.
+
+    Args:
+        a: an integer
+        b: an integer
+    Returns:
+        a+b in str format
+    """
+    ...
+```
+
+Note that the docstring is between the `-> str:` and the `...`. I did this and re-ran `maturin develop --bindings pyo3` and then mousing over `sum_as_string` in a Python script showed the docstring. Win!
+
+
+### [Python object types](https://pyo3.rs/v0.27.1/python-from-rust.html)
+
+The other half of the coin. How do we refer to Python objects?
+ - All Python objects are wrapped in smart pointers, `Py<T>`, `Bound<'py, T>`, `Borrowed<'a, 'py, T>`.
+ - The generic parameter `T` of the smart pointers can be filled by
+   - `PyAny` (resembling `typing.Any`)
+   - `PyList`, `PyDict`, `PyTuple`
+   - User-defined `#[pyclass]` types
