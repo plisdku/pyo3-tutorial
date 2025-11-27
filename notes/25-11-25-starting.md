@@ -28,12 +28,12 @@ I had the repo set up already, but I ran `uv init .` and got this directory stru
 ├── main.py
 ├── notes
 │   └── 25-11-25-starting.md
-└── pyproject.tomlin
+└── pyproject.toml
 ```
 
 I ran the hello-world with `uv run main.py` which initialized a new virtual environment at `.venv` in the repo. I had to add `.venv` to my .gitignore manually since I'd already created a pretty empty one.
 
-It is suggested to use `uv run <command>` because it will always use the right environment (I guess that is, the one present)... I see that there is a `.python-version` file now in the root of my repo. It has a single line in it, reading `3.14`, and I changed it to `3.12` and ran `uv run python --version`. After a tweak to the `pyproject.toml` to allow older pythons, this actually rebuilt my virtual environment for me.
+It is suggested to use `uv run <command>` because it will always use the right environment (I guess that is, the one present)... I see that there is a `.python-version` file now in the root of my repo. Yes, `uv` created this, and uses it when making a new virtual environment. It has a single line in it, originall `3.14`, and I changed it to `3.12` and ran `uv run python --version`. After a tweak to the `pyproject.toml` to allow older pythons, this actually rebuilt my virtual environment for me.
 
 Anyway I'm up to here now:
 
@@ -85,7 +85,7 @@ Anyway, `[dependency-groups]` seems to be the new way, and I have `maturin` now.
   Caused by: `maturin init` cannot be run on existing projects
 ```
 
-Ok I already started it. Let's just try in a subdirectory.
+Ok I already started the project. Let's just try `maturin init` in a subdirectory.
 
 ```
 % uv run maturin init petunia
@@ -128,7 +128,7 @@ Holy moly it worked.
 
 ### [Using Rust from Python](https://pyo3.rs/v0.27.1/rust-from-python.html)
 
-It says I can make modules, functions, and classes with methods. Neato.
+It says I can make modules, functions, and classes with methods. Neato. Their `sum_as_string` example works...
 
 #### `.pyi` file
 
@@ -161,3 +161,6 @@ The other half of the coin. How do we refer to Python objects?
    - `PyAny` (resembling `typing.Any`)
    - `PyList`, `PyDict`, `PyTuple`
    - User-defined `#[pyclass]` types
+
+
+
