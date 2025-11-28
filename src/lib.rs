@@ -21,7 +21,6 @@ mod petunia {
         // Now we sort it in a stupid way.
 
         for ii in (0..a.len()).rev() {
-            println!("ii = {}", ii);
             for jj in ii..(a.len()-1) {
                 if a[jj] > a[jj+1] {
                     let tmp = a[jj];
