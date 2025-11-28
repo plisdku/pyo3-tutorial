@@ -11,3 +11,8 @@ def sum_as_string(a: int, b: int) -> str:
         a+b in str format
     """
     ...
+
+def sort(a: list[int]) -> list[int]:
+    """
+    Return a sorted copy of a list of ints.
+    """
