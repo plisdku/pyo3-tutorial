@@ -19,6 +19,7 @@ mod petunia {
     fn sort_py(mut a: Vec<i64>) -> Vec<i64> {
         // At this point, we've already copied the vector.
         // Now we sort it in a stupid way.
+        // Is this bubblesort? It's a stupid sort.
 
         for ii in (0..a.len()).rev() {
             for jj in ii..(a.len()-1) {
